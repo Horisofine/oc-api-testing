@@ -14,9 +14,7 @@ class Event {
     eventType: string;
     categories: string;
     status: string;
-    name: any;
-    members: any;
-    id: any;
+    eventId: any;
 
   constructor(title: string, location : string, date : string, time : string, description : string, audience : string, attendees : number, ticketPrice : number, ticketAvailability : boolean, eventType : string, categories : string, status : string) {
     this.title = title,
@@ -50,7 +48,7 @@ class Event {
         categories: this.categories,
         status: this.status
       });
-      this.id = docRef.id;
+      this.eventId = docRef.id;
       console.log("Successfully created an event")
       return true;
     } catch (error) {
@@ -62,7 +60,7 @@ class Event {
   // Update the event in Firestore
   async update() {
     try {
-      const eventRef = doc(firestore, "events", this.id)
+      const eventRef = doc(firestore, "events", this.eventId)
 
       await updateDoc(eventRef, {
         title: this.title,
@@ -89,7 +87,7 @@ class Event {
   // Delete the association from Firestore
   async delete() {
     try {
-      await deleteDoc(doc(firestore, "events", this.id));
+      await deleteDoc(doc(firestore, "events", this.eventId));
       console.log("Successfully deleted the event")
       return true;
     } catch (error) {
