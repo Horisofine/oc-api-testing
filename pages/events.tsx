@@ -1,8 +1,7 @@
 import Image from "next/image";
 import Event from "../models/events";
-import Link from "next/link";
 
-export default function Home() {
+export default function Events() {
   async function createEvent() {
     const event = new Event(
       "Sample Event",
@@ -60,23 +59,10 @@ export default function Home() {
 
   return (
     <div>
-      <ul>
-        <li>
-          <Link href={"/events"}>Events</Link>
-        </li>
-        <li>
-          <Link href={"/associations"}>Associations</Link>
-        </li>
-        <li>
-          <Link href={"/students"}>Students</Link>
-        </li>
-        <li>
-          <Link href={"/tickets"}>Tickets</Link>
-        </li>
-        <li>
-          <Link href={"/events"}>Events</Link>
-        </li>
-      </ul>
+      <button onClick={createEvent}>Create an event</button>
     </div>
   );
+}
+function createEvent() {
+  throw new Error("Function not implemented.");
 }
