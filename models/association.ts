@@ -1,4 +1,4 @@
-import { firestore } from '@/firebaseConfig';
+import { firestore } from '@/private/firebaseconfig';
 import { collection, addDoc, doc, updateDoc, deleteDoc, getDoc } from "firebase/firestore"
 
 class Association {
@@ -6,9 +6,9 @@ class Association {
   faculty: string;
   associationEmail: string;
   password: string;
-  id: any;
+  associationId: any;
 
-  constructor(name: string, faculty: string, associationEmail: string, password: string, id: any) {
+  constructor(name: string, faculty: string, associationEmail: string, password: string) {
     this.name = name;
     this.faculty = faculty;
     this.associationEmail = associationEmail;
@@ -24,7 +24,7 @@ class Association {
         associationEmail: this.associationEmail,
         password: this.password,
       });
-      this.id = docRef.id;
+      this.associationId = docRef.id;
       console.log("Successfully created an association")
       return true;
     } catch (error) {
@@ -36,7 +36,7 @@ class Association {
   // Update the association in Firestore
   async update(): Promise<boolean> {
     try {
-      const associationRef = doc(firestore, "associations", this.id);
+      const associationRef = doc(firestore, "associations", this.associationId);
       await updateDoc(associationRef, {
         name: this.name,
         faculty: this.faculty,
@@ -54,7 +54,7 @@ class Association {
   // Delete the association from Firestore
   async delete(): Promise<boolean> {
     try {
-    await deleteDoc(doc(firestore, "associations", this.id));
+    await deleteDoc(doc(firestore, "associations", this.associationId));
     console.log("Successfully deleted the association");
     return true;
     } catch (error) {
@@ -75,8 +75,7 @@ class Association {
           data.name,
           data.faculty,
           data.associationEmail,
-          data.password,
-          data.id
+          data.password
         );
       }
       return null;
