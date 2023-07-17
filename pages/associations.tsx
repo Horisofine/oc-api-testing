@@ -31,7 +31,7 @@ export default function Associations() {
 
         // Fetch an association by ID
         const associationId = "yourAssociationId";
-        await Association.fetchById(association.id).then((association) => {
+        await Association.fetchById(association.associationId).then((association) => {
         if (association) {
             console.log("Fetched association:", association);
         } else {
