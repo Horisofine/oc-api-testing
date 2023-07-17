@@ -22,21 +22,21 @@ export default function Associations() {
         // Update the association
         association.name = "Updated Association";
         await association.update().then((success) => {
-        if (success) {
-            console.log("Association updated successfully.");
-        } else {
-            console.log("Failed to update the association.");
-        }
+            if (success) {
+                console.log("Association updated successfully.");
+            } else {
+                console.log("Failed to update the association.");
+            }
         });
 
         // Fetch an association by ID
         const associationId = "yourAssociationId";
         await Association.fetchById(association.associationId).then((association) => {
-        if (association) {
-            console.log("Fetched association:", association);
-        } else {
-            console.log("Association not found.");
-        }
+            if (association) {
+                console.log("Fetched association:", association);
+            } else {
+                console.log("Association not found.");
+            }
         });
 
         // Delete the association
