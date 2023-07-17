@@ -49,7 +49,7 @@ export default function Home() {
 
     // Fetch an event by ID
     const eventId = "yourEventId";
-    await Event.fetchById(event.id).then((event) => {
+    await Event.fetchById(event.eventId).then((event) => {
       if (event) {
         console.log("Fetched event:", event);
       } else {
@@ -74,7 +74,7 @@ export default function Home() {
           <Link href={"/tickets"}>Tickets</Link>
         </li>
         <li>
-          <Link href={"/events"}>Events</Link>
+          <Link href={"/createEvent"}>Create events</Link>
         </li>
       </ul>
     </div>
