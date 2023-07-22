@@ -67,8 +67,8 @@ export default function Home() {
         <li>
           <Link href={"/associations"}>Associations</Link>
         </li>
-        <li>
-          <Link href={"/students"}>Students</Link>
+        <li >
+          <Link className="line-through" href={"/students"}>Students</Link>
         </li>
         <li>
           <Link href={"/tickets"}>Tickets</Link>
