@@ -34,7 +34,6 @@ export default function CreateEvent() {
       eventType,
       categories,
       status,
-      eventId: null,
     };
     const eventRef = await addDoc(collection(firestore, "events"), event);
 
@@ -49,7 +48,7 @@ export default function CreateEvent() {
         eventDate: date,
         ticketId: null,
       };
-      const ticketRef = await addDoc(collection(firestore, "tickets"), ticket);
+      const ticketRef = await addDoc(collection(firestore, "events", eventRef.id, "tickets"), ticket);
       tickets.push(ticketRef.id);
     }
 

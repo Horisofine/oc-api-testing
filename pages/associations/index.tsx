@@ -1,13 +1,11 @@
 import Image from "next/image";
-import Association from "../models/association";
+import Association from "../../models/association";
 
 export default function Associations() {
     async function createAssociation() {
         const association = new Association(
             "Test Name",
             "Test Faculty",
-            "Test Email",
-            "Test Password"
         );
 
         // Save the association

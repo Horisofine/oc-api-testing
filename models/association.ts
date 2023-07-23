@@ -4,15 +4,12 @@ import { collection, addDoc, doc, updateDoc, deleteDoc, getDoc } from "firebase/
 class Association {
   name: string;
   faculty: string;
-  associationEmail: string;
-  password: string;
   associationId: any;
+  universityId: any;
 
-  constructor(name: string, faculty: string, associationEmail: string, password: string) {
+  constructor(name: string, faculty: string) {
     this.name = name;
     this.faculty = faculty;
-    this.associationEmail = associationEmail;
-    this.password = password;
   }
 
   // Save the association to Firestore
@@ -21,8 +18,6 @@ class Association {
       const docRef = await addDoc(collection(firestore, 'associations'), {
         name: this.name,
         faculty: this.faculty,
-        associationEmail: this.associationEmail,
-        password: this.password,
       });
       this.associationId = docRef.id;
       console.log("Successfully created an association")
@@ -40,8 +35,6 @@ class Association {
       await updateDoc(associationRef, {
         name: this.name,
         faculty: this.faculty,
-        associationEmail: this.associationEmail,
-        password: this.password,
     })
       console.log("Successfully updated the association");
       return true;
@@ -74,8 +67,6 @@ class Association {
         return new Association(
           data.name,
           data.faculty,
-          data.associationEmail,
-          data.password
         );
       }
       return null;
