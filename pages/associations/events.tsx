@@ -13,7 +13,7 @@ import { getAuth, onAuthStateChanged, signOut } from "firebase/auth";
 import { firestore, auth } from "../../private/firebaseconfig"; // Replace '../firebase' with the path to your Firebase config and initialization file
 import { useRouter } from "next/router";
 import Link from "next/link";
-import Link from "next/link";
+
 
 const AssociationEvents = () => {
   const router = useRouter();
@@ -70,8 +70,6 @@ const AssociationEvents = () => {
   const handleSignOut = () => {
     signOut(auth)
       .then(() => {
-    signOut(auth)
-      .then(() => {
         // Sign-out successful.
         console.log("User signed out successfully");
         router.push("/associations/login");
@@ -117,7 +115,7 @@ const AssociationEvents = () => {
       <ul>
         {publishedFvents.map((event: any) => (
           <li key={event.id}>
-            <h3>{event.title}</h3>
+            <Link href={`/associations/${event.id}`}><h3>{event.title}</h3></Link>
             <p>{event.description}</p>
             {/* Add other event details as needed */}
             <button
@@ -134,7 +132,7 @@ const AssociationEvents = () => {
       <ul>
         {draftFvents.map((event: any) => (
           <li key={event.id}>
-            <h3>{event.title}</h3>
+            <Link href={`/associations/${event.id}`}><h3>{event.title}</h3></Link>
             <p>{event.description}</p>
             {/* Add other event details as needed */}
             <button

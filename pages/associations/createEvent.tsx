@@ -95,7 +95,7 @@ export default function CreateEvent() {
         description: `test ${randomIndex}`,
         audience: `test ${randomIndex}`,
         attendees: 3,
-        ticketPrice: 0,
+        ticketPrice: 5,
         ticketAvailability: true,
         eventType: `test ${randomIndex}`,
         categories: `test ${randomIndex}`,
