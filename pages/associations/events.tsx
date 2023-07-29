@@ -13,6 +13,7 @@ import { getAuth, onAuthStateChanged, signOut } from "firebase/auth";
 import { firestore, auth } from "../../private/firebaseconfig"; // Replace '../firebase' with the path to your Firebase config and initialization file
 import { useRouter } from "next/router";
 import Link from "next/link";
+import Link from "next/link";
 
 const AssociationEvents = () => {
   const router = useRouter();
@@ -69,7 +70,13 @@ const AssociationEvents = () => {
   const handleSignOut = () => {
     signOut(auth)
       .then(() => {
+    signOut(auth)
+      .then(() => {
         // Sign-out successful.
+        console.log("User signed out successfully");
+        router.push("/associations/login");
+      })
+      .catch((error) => {
         console.log("User signed out successfully");
         router.push("/associations/login");
       })
