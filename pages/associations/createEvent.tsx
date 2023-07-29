@@ -75,16 +75,68 @@ export default function CreateEvent() {
       );
       // Redirect or display success message
 
-        router.push("/associations/events")
-
+      router.push("/associations/events");
     } catch (error) {
-      console.log("Error creating an event:", error)
+      console.log("Error creating an event:", error);
+    }
+  };
+
+  const randomIndex = Math.random();
+  const handleRandomInput = async () => {
+    
+    try {
+      // Create event document
+      const event = {
+        associationId: uid,
+        title: `test ${randomIndex}`,
+        location: `test ${randomIndex}`,
+        date: `test ${randomIndex}`,
+        time: `test ${randomIndex}`,
+        description: `test ${randomIndex}`,
+        audience: `test ${randomIndex}`,
+        attendees: 3,
+        ticketPrice: 0,
+        ticketAvailability: true,
+        eventType: `test ${randomIndex}`,
+        categories: `test ${randomIndex}`,
+        status: "Draft",
+      };
+      const eventRef = await addDoc(collection(firestore, "events"), event);
+
+      // Create tickets
+      const tickets = [];
+      for (let i = 0; i < attendees; i++) {
+        const ticket = {
+          eventId: eventRef.id,
+          datePurchased: "",
+          price: ticketPrice,
+          status: "available",
+          eventDate: date,
+        };
+        const ticketRef = await addDoc(
+          collection(firestore, "events", eventRef.id, "tickets"),
+          ticket
+        );
+        tickets.push(ticketRef.id);
+      }
+
+      console.log(
+        "Random Event and tickets created successfully:",
+        eventRef.id,
+        tickets
+      );
+      // Redirect or display success message
+
+      router.push("/associations/events");
+    } catch (error) {
+      console.log("Error creating an event:", error);
     }
   };
 
   return (
     <div>
       <h1>Create Event</h1>
+      <button onClick={handleRandomInput}>Random Event</button>
       <form onSubmit={handleFormSubmit} className="flex flex-col">
         <label>
           Title:
@@ -176,11 +228,10 @@ export default function CreateEvent() {
         </label>
         <label>
           Status:
-          <input
-            type="text"
-            value={status}
-            onChange={(e) => setStatus(e.target.value)}
-          />
+          <select value={status} onChange={(e) => setStatus(e.target.value)}>
+            <option value="Draft">Draft</option>
+            <option value="Published">Published</option>
+          </select>
         </label>
         <button type="submit">Create Event</button>
       </form>
